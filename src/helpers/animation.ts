@@ -6,6 +6,16 @@ export const createAnimation = (loaderName: string, frames: string, suffix: stri
   }
 
   const styleEl = document.createElement("style");
+
+  // Lấy nonce từ meta tag trong document
+  const nonceMeta = document.querySelector('meta[id="nonce-meta"]');
+  if (nonceMeta) {
+    const nonce = nonceMeta.getAttribute("data-nonce");
+    if (nonce) {
+      styleEl.setAttribute("nonce", nonce);
+    }
+  }
+
   document.head.appendChild(styleEl);
   const styleSheet = styleEl.sheet;
 
@@ -21,3 +31,4 @@ export const createAnimation = (loaderName: string, frames: string, suffix: stri
 
   return animationName;
 };
+
